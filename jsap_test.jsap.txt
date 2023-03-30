@@ -1,0 +1,141 @@
+{
+	"host": "dld.arces.unibo.it",
+	"oauth": {
+		"enable": false,
+		"register": "https://localhost:8443/oauth/register",
+		"tokenRequest": "https://localhost:8443/oauth/token"
+	},
+	"sparql11protocol": {
+		"protocol": "http",
+		"port": 8668,
+		"query": {
+			"path": "/query",
+			"method": "POST",
+			"format": "JSON"
+		},
+		"update": {
+			"path": "/update",
+			"method": "POST",
+			"format": "JSON"
+		}
+	},
+	"sparql11seprotocol": {
+		"protocol": "ws",
+		"availableProtocols": {
+			"ws": {
+				"port": 9668,
+				"path": "/subscribe"
+			},
+			"wss": {
+				"port": 9443,
+				"path": "/secure/subscribe"
+			}
+		}
+	},
+	"graphs": {
+		
+	},
+	"namespaces": {
+		"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+		"rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+		"xsd": "http://www.w3.org/2001/XMLSchema#",
+		"owl": "http://www.w3.org/2002/07/owl#",
+		"time":"http://www.w3.org/2006/time#",
+		"my2sec": "http://www.vaimee.it/ontology/my2sec#",
+		"vaimee": "http://www.vaimee.it/ontology#",
+		"discord": "http://www.vaimee.it/ontology/discord#",
+		"serra": "http://www.vaimee.it/ontology/serra#"
+	},
+	"extended": {
+		"discordConfig": {
+			"CHANNEL_ID": 1082321734058901598, 
+			"TOKEN": "MTA4MjYyMTk2MTAwNTQ1MzMxMw.GHHB3T.Yj5ZvlaMURbAy3mTjeNljGi2weKKgDicc66QRQ"
+		}
+	},
+	"updates": {
+
+		"SEND_DISCORD_MESSAGE":{
+			"sparql":"INSERT { GRAPH discord:messages { ?uuid rdf:type discord:Message; discord:messageValue ?message_value; discord:messageSource ?source; time:inXSDDateTimeStamp ?timestamp }} WHERE {BIND(uuid() AS ?uuid) BIND(now() AS ?timestamp) }",
+			"forcedBindings": {
+				"message_value": {
+					"type": "literal",
+					"value": "testo"
+				},
+				"source": {
+					"type": "literal",
+					"value": "http://www.vaimee.it/sources/bug-report"
+				}
+			}
+		},
+
+		"SEND_DISCORD_MESSAGE_TEST":{
+			"sparql":"INSERT { GRAPH discord:messages { ?uuid rdf:type discord:Message; discord:messageValue '''CIAO'''; discord:messageSource '''IO'''; time:inXSDDateTimeStamp ?timestamp }} WHERE {BIND(uuid() AS ?uuid) BIND(now() AS ?timestamp) }"
+		},
+		"SEND_TEMPERATURE":{
+			"sparql":"INSERT { GRAPH serra:temperature { ?uuid rdf:type serra:Sensor; serra:name '''sensore6'''; serra:hasTemp '''28'''; time:inXSDDateTimeStamp ?timestamp }} WHERE {BIND(uuid() AS ?uuid) BIND(now() AS ?timestamp) }"
+		},
+		"TEST_NAMES":{
+			"sparql":"INSERT DATA { GRAPH vaimee:people { vaimee:greg rdf:type rdf:Person; vaimee:hasHairColor '''red''' }}"
+		},
+		"BINDINGS":{
+			"sparql":"INSERT DATA { GRAPH vaimee:people { ?name rdf:type rdf:Person; vaimee:hasHairColor ?color }}",
+			"forcedBindings": {
+				"name": {
+					"type": "uri",
+					"value": "vaimee:greg"
+				},
+				"color": {
+					"type": "literal",
+					"value": "red"
+				}
+			}
+		},
+		"TEST_BINDINGS":{
+			"sparql":"INSERT DATA { GRAPH vaimee:people { ?name rdf:type rdf:Person; vaimee:hasHairColor ?color }}",
+			"forcedBindings": {}
+		},
+		"DELETE_GRAPH":{
+			"sparql":"DELETE { GRAPH ?graph { ?s ?p ?o }  } WHERE { GRAPH ?graph { ?s ?p ?o } }",
+			"forcedBindings": {
+				"graph": {
+					"type": "uri",
+					"value": "vaimee:example"
+				}
+			}
+		},
+		"DELETE_DISCORD_MESSAGES":{
+			"sparql":"DELETE { GRAPH discord:messages { ?s ?p ?o }  } WHERE { GRAPH discord:messages { ?s ?p ?o } }"
+		},
+		"DELETE_TEMPERATURE":{
+			"sparql":"DELETE { GRAPH serra:temperature { ?s ?p ?o }  } WHERE { GRAPH serra:temperature { ?s ?p ?o } }"
+		}
+	},
+	"queries": {
+
+		"ALL_DISCORD_MESSAGES":{
+			"sparql":"SELECT * WHERE { GRAPH discord:messages { ?uuid rdf:type discord:Message; discord:messageValue ?message_value; discord:messageSource ?source; time:inXSDDateTimeStamp ?timestamp}}"
+	},
+		"ALL_TEMPERATURE":{
+			"sparql":"SELECT ?Name ?Temperature ?Time WHERE { GRAPH serra:temperature { ?uuid rdf:type serra:Sensor; serra:name ?Name; serra:hasTemp ?Temperature; time:inXSDDateTimeStamp ?Time}}"
+	},	
+         	"ALL_PEOPLE":{
+			"sparql":"SELECT * WHERE { GRAPH vaimee:people { ?name rdf:type rdf:Person}}"
+        },
+		"ALL_COLORS":{
+			"sparql":"SELECT ?color WHERE { GRAPH vaimee:people { ?name vaimee:hasHairColor ?color}}"
+	},
+		"ALL_INFO":{
+			"sparql":"SELECT * WHERE { GRAPH vaimee:people { ?name vaimee:hasHairColor ?color}}"
+	},
+		"BLONDE":{
+			"sparql":"SELECT * WHERE { GRAPH vaimee:people { ?s rdf:type rdf:Person; vaimee:hasHairColor '''blonde'''}}"
+	},
+		"DISCORD_ALL_INFO":{
+			"sparql":"SELECT * WHERE { GRAPH discord:messages { ?S ?P ?O}}"
+	},
+		"GET_ALL_GRAPHS_COUNT":{
+			"sparql":"SELECT ?g (COUNT(?s) AS ?ntriples) WHERE {GRAPH ?g { ?s ?p ?o }}GROUP BY ?g"
+	}
+
+	}
+}
