@@ -4,8 +4,10 @@ from sepy.SAPObject import *
 from sepy.SEPA import SEPA
 import json
 
-mySAP = open("jsap_test.jsap.txt", 'r')
+mySAP = open("./Resources/jsap_test.jsap", 'r')
 _JSAP = json.load(mySAP)
+
+
 
 #CONFIGURAZIONE DISCORD
 CHANNEL_ID = _JSAP['extended']['discordConfig']['CHANNEL_ID']    
@@ -43,10 +45,15 @@ Content:
 """
 #------------------------------------------------------------------------------------
 
+first_results=1
 def on_notification(a,r):
-    print(discord_message_data(a))
-    canale = bot.get_channel(CHANNEL_ID)
-    bot.loop.create_task(canale.send(discord_message_data(a)))
+    if first_results == 1:
+        print("Ignored first results")
+        first_results=0
+    else:
+        print(discord_message_data(a))
+        canale = bot.get_channel(CHANNEL_ID)
+        bot.loop.create_task(canale.send(discord_message_data(a)))
 
 @bot.event
 async def on_ready():
