@@ -1,2 +1,3 @@
 discord
 sepy
+requests
