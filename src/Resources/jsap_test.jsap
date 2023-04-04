@@ -48,8 +48,8 @@
 	},
 	"extended": {
 		"discordConfig": {
-			"CHANNEL_ID": "1082321734058901598", 
-			"TOKEN": "MTA4MjYyMTk2MTAwNTQ1MzMxMw.Gap5U5.QYbMcfUhLsKojosH9DWaRBKIe1a7pPD92UwjL8"
+			"CHANNEL_ID": "your_channel", 
+			"TOKEN": "your_token"
 		}
 	},
 	"updates": {
