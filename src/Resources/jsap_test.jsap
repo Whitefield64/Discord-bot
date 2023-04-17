@@ -1,5 +1,5 @@
 {
-	"host": "dld.arces.unibo.it",
+	"host": "localhost",
 	"oauth": {
 		"enable": false,
 		"register": "https://localhost:8443/oauth/register",
@@ -7,7 +7,7 @@
 	},
 	"sparql11protocol": {
 		"protocol": "http",
-		"port": 8668,
+		"port": 8667,
 		"query": {
 			"path": "/query",
 			"method": "POST",
@@ -23,7 +23,7 @@
 		"protocol": "ws",
 		"availableProtocols": {
 			"ws": {
-				"port": 9668,
+				"port": 9667,
 				"path": "/subscribe"
 			},
 			"wss": {
@@ -48,8 +48,8 @@
 	},
 	"extended": {
 		"discordConfig": {
-			"CHANNEL_ID": insert your ID, 
-			"TOKEN": "insert your token"
+			"CHANNEL_ID": "your_channel", 
+			"TOKEN": "your_token"
 		}
 	},
 	"updates": {
