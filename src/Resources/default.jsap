@@ -74,25 +74,21 @@
 		"SEND_TEMPERATURE":{
 			"sparql":"INSERT { GRAPH serra:temperature { ?uuid rdf:type serra:Sensor; serra:name '''sensore6'''; serra:hasTemp '''28'''; time:inXSDDateTimeStamp ?timestamp }} WHERE {BIND(uuid() AS ?uuid) BIND(now() AS ?timestamp) }"
 		},
-		"TEST_NAMES":{
-			"sparql":"INSERT DATA { GRAPH vaimee:people { vaimee:greg rdf:type rdf:Person; vaimee:hasHairColor '''red''' }}"
+		"SEND_ERROR":{
+			"sparql":"INSERT { GRAPH error:messages { ?uuid rdf:type error:Error; error:Type '''ErrorMessage'''; error:source '''BugReportMy2Sec'''; time:inXSDDateTimeStamp ?timestamp; error:errorType '''FATAL'''; error:value '''error full description'''; error:comment '''dev comment'''}} WHERE {BIND(uuid() AS ?uuid) BIND(now() AS ?timestamp) }"
 		},
-		"BINDINGS":{
-			"sparql":"INSERT DATA { GRAPH vaimee:people { ?name rdf:type rdf:Person; vaimee:hasHairColor ?color }}",
+		"ADD_USER":{
+			"sparql":"INSERT DATA { GRAPH <http://www.vaimee.it/my2sec/members> { ?usergraph my2sec:username ?username_literal }}",
 			"forcedBindings": {
-				"name": {
+				"usergraph": {
 					"type": "uri",
-					"value": "vaimee:greg"
+					"value": "http://www.vaimee.it/my2sec/defuser@vaimee.it"
 				},
-				"color": {
+				"username_literal": {
 					"type": "literal",
-					"value": "red"
+					"value": "defuser"
 				}
 			}
-		},
-		"TEST_BINDINGS":{
-			"sparql":"INSERT DATA { GRAPH vaimee:people { ?name rdf:type rdf:Person; vaimee:hasHairColor ?color }}",
-			"forcedBindings": {}
 		},
 		"DELETE_GRAPH":{
 			"sparql":"DELETE { GRAPH ?graph { ?s ?p ?o }  } WHERE { GRAPH ?graph { ?s ?p ?o } }",
@@ -102,33 +98,20 @@
 					"value": "vaimee:example"
 				}
 			}
-		},
-		"DELETE_DISCORD_MESSAGES":{
-			"sparql":"DELETE { GRAPH discord:messages { ?s ?p ?o }  } WHERE { GRAPH discord:messages { ?s ?p ?o } }"
-		},
-		"DELETE_TEMPERATURE":{
-			"sparql":"DELETE { GRAPH serra:temperature { ?s ?p ?o }  } WHERE { GRAPH serra:temperature { ?s ?p ?o } }"
 		}
 	},
 	"queries": {
-
 		"ALL_DISCORD_MESSAGES":{
 			"sparql":"SELECT * WHERE { GRAPH discord:messages { ?uuid rdf:type discord:Message; discord:messageValue ?message_value; discord:messageSource ?source; time:inXSDDateTimeStamp ?timestamp}}"
 	},
 		"ALL_TEMPERATURE":{
 			"sparql":"SELECT ?Name ?Temperature ?Time WHERE { GRAPH serra:temperature { ?uuid rdf:type serra:Sensor; serra:name ?Name; serra:hasTemp ?Temperature; time:inXSDDateTimeStamp ?Time}}"
-	},	
-         	"ALL_PEOPLE":{
-			"sparql":"SELECT * WHERE { GRAPH vaimee:people { ?name rdf:type rdf:Person}}"
-        },
-		"ALL_COLORS":{
-			"sparql":"SELECT ?color WHERE { GRAPH vaimee:people { ?name vaimee:hasHairColor ?color}}"
 	},
-		"ALL_INFO":{
-			"sparql":"SELECT * WHERE { GRAPH vaimee:people { ?name vaimee:hasHairColor ?color}}"
+		"ALL_ERROR":{
+			"sparql":"SELECT ?Type ?Source ?Time ?ErrorType ?Value ?Comment WHERE { GRAPH error:messages { ?uuid rdf:type error:Error; error:Type ?Type; error:source ?Source; time:inXSDDateTimeStamp ?Time; error:errorType ?ErrorType; error:value ?Value; error:comment ?Comment}}"
 	},
-		"BLONDE":{
-			"sparql":"SELECT * WHERE { GRAPH vaimee:people { ?s rdf:type rdf:Person; vaimee:hasHairColor '''blonde'''}}"
+		"ALL_USERNAMES": {
+			"sparql":"SELECT * WHERE { GRAPH <http://www.vaimee.it/my2sec/members> { ?s my2sec:username ?o }}"
 	},
 		"DISCORD_ALL_INFO":{
 			"sparql":"SELECT * WHERE { GRAPH discord:messages { ?S ?P ?O}}"

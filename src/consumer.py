@@ -95,8 +95,7 @@ def discord_message_data(a):
     DATE = a[0]['timestamp']['value'].split('T')[0]
     TIME = a[0]['timestamp']['value'].split('T')[1].split('.')[0]
     return f"""
->>> New message received from: *{SOURCE}*
-{TIME}, {DATE}
+>>> {TIME}, {DATE}: New message received from: **{SOURCE}**
 ```{MESSAGE_VALUE}
 ```
 """

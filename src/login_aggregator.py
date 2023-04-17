@@ -78,18 +78,15 @@ else:
         
 #------------------------------------------------------------------------------------
 #Formats subscription data. Returns a fromatted string
-def error_format(res): 
+def login_format(res): 
     if res == []:
-        print('NON CI SONO ERRORI') 
+        print('NON CI SONO USER') 
         return
-    SOURCE = res[0]['Source']['value']
-    TIME = res[0]['Time']['value'].split('T')[1].split('.')[0]
-    ERRORTYPE = res[0]['ErrorType']['value']
-    DESCRIPTION = res[0]['Value']['value']
-    COMMENT = res[0]['Comment']['value']
-    return f"Error generated from {SOURCE} AT {TIME}\\nErrorType: {ERRORTYPE}\\nComment:\\n{COMMENT}\\n----------------------------------------\\nDescription:\\n{DESCRIPTION}"
+    MAIL = res[0]['s']['value'].split('/')[-1]
+    USERNAME = res[0]['o']['value']
+    return f"A new user has registered\\nMail: {MAIL}\\nUsername: {USERNAME}"
 #-------------------------------------------------------------------------------------   
-#Called when a new error si received   
+#Called when a new login si received   
 def on_notification(a,r):
     global first_results
     if first_results == 1:
@@ -97,12 +94,12 @@ def on_notification(a,r):
         first_results = 0
     else:
         client.update('SEND_DISCORD_MESSAGE', forcedBindings={
-        "message_value" : error_format(a),       
-        "source" : "ERROR_MESSAGES_AGGREGATOR"
+        "message_value" : login_format(a),       
+        "source" : "LOGIN_AGGREGATOR"
         })
 
 client = SEPA(sapObject=SAPObject(_JSAP))
-client.subscribe('ALL_ERROR', 'PROVA', {}, on_notification)
+client.subscribe('ALL_USERNAMES', 'PROVA', {}, on_notification)
 
 while(True):
     time.sleep(10)
