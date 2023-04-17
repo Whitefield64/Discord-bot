@@ -72,7 +72,7 @@
 			"sparql":"INSERT { GRAPH discord:messages { ?uuid rdf:type discord:Message; discord:messageValue '''CIAO'''; discord:messageSource '''IO'''; time:inXSDDateTimeStamp ?timestamp }} WHERE {BIND(uuid() AS ?uuid) BIND(now() AS ?timestamp) }"
 		},
 		"SEND_TEMPERATURE":{
-			"sparql":"INSERT { GRAPH serra:temperature { ?uuid rdf:type serra:Sensor; serra:name '''sensore6'''; serra:hasTemp '''28'''; time:inXSDDateTimeStamp ?timestamp }} WHERE {BIND(uuid() AS ?uuid) BIND(now() AS ?timestamp) }"
+			"sparql":"INSERT { GRAPH serra:temperature { ?uuid rdf:type serra:Sensor; serra:name '''sensore1'''; serra:hasTemp '''28'''; time:inXSDDateTimeStamp ?timestamp }} WHERE {BIND(uuid() AS ?uuid) BIND(now() AS ?timestamp) }"
 		},
 		"SEND_ERROR":{
 			"sparql":"INSERT { GRAPH error:messages { ?uuid rdf:type error:Error; error:Type '''ErrorMessage'''; error:source '''BugReportMy2Sec'''; time:inXSDDateTimeStamp ?timestamp; error:errorType '''FATAL'''; error:value '''error full description'''; error:comment '''dev comment'''}} WHERE {BIND(uuid() AS ?uuid) BIND(now() AS ?timestamp) }"
