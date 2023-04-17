@@ -1,5 +1,5 @@
 # Discord-bot-development
-![Architecture](Discord_Bot_Architecture.png)
+![Architecture](Bot_architecture.png)
 ## Intro
 ## Configuration
 ## Deployment

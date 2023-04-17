@@ -1,7 +1,7 @@
-import discord
 from sepy.SAPObject import *
 from sepy.SEPA import SEPA
 import json
+import time
 import os
 import sys
 
@@ -76,44 +76,34 @@ else:
         print("WARNING: unknown parameter: "+str(sys.argv[1]))
         print_help()
         
-#------------------------------------------------------------------------
-#DISCORD CONFIGURATION
-CHANNEL_ID = int(_JSAP['extended']['discordConfig']['CHANNEL_ID'])    
-TOKEN = _JSAP['extended']['discordConfig']['TOKEN'] 
-intents = discord.Intents.default()
-intents.members = True
-intents.message_content = True
-intents.guild_messages = True
-bot = discord.Client(intents=intents)
-
-#-----------------------------------------------------------------------
-def discord_message_data(a):
-    if a == []:
-        return []
-    MESSAGE_VALUE = a[0]['message_value']['value']
-    SOURCE = a[0]['source']['value']
-    DATE = a[0]['timestamp']['value'].split('T')[0]
-    TIME = a[0]['timestamp']['value'].split('T')[1].split('.')[0]
-    return f"""
->>> New message received from: *{SOURCE}*
-{TIME}, {DATE}
-```{MESSAGE_VALUE}
-```
-"""
 #------------------------------------------------------------------------------------
-
+#Formats subscription data. Returns a fromatted string
+def error_format(res): 
+    if res == []:
+        print('NON CI SONO ERRORI') 
+        return
+    SOURCE = res[0]['Source']['value']
+    TIME = res[0]['Time']['value'].split('T')[1].split('.')[0]
+    ERRORTYPE = res[0]['ErrorType']['value']
+    DESCRIPTION = res[0]['Value']['value']
+    COMMENT = res[0]['Comment']['value']
+    return f"Error generated from {SOURCE} AT {TIME}\\nErrorType: {ERRORTYPE}\\nComment:\\n{COMMENT}\\n----------------------------------------\\nDescription:\\n{DESCRIPTION}"
+#-------------------------------------------------------------------------------------   
+#Called when a new error si received   
 def on_notification(a,r):
     global first_results
     if first_results == 1:
-        print("Ignored first results")
-        first_results=0
+        print('first results ignored')
+        first_results = 0
     else:
-        canale = bot.get_channel(CHANNEL_ID)
-        bot.loop.create_task(canale.send(discord_message_data(a)))
+        errori = error_format(a)
+        client.update('SEND_DISCORD_MESSAGE', forcedBindings={
+        "message_value" : error_format(a),       
+        "source" : "ERROR_MESSAGES_AGGREGATOR"
+        })
 
-@bot.event
-async def on_ready():
-    client = SEPA(sapObject=SAPObject(_JSAP))
-    client.subscribe('ALL_DISCORD_MESSAGES', 'PROVA', {}, on_notification)
+client = SEPA(sapObject=SAPObject(_JSAP))
+client.subscribe('ALL_ERROR', 'PROVA', {}, on_notification)
 
-bot.run(TOKEN)
+while(True):
+    time.sleep(10)

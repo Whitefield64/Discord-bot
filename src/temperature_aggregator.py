@@ -1,7 +1,7 @@
-import discord
 from sepy.SAPObject import *
 from sepy.SEPA import SEPA
 import json
+import time
 import os
 import sys
 
@@ -76,44 +76,35 @@ else:
         print("WARNING: unknown parameter: "+str(sys.argv[1]))
         print_help()
         
-#------------------------------------------------------------------------
-#DISCORD CONFIGURATION
-CHANNEL_ID = int(_JSAP['extended']['discordConfig']['CHANNEL_ID'])    
-TOKEN = _JSAP['extended']['discordConfig']['TOKEN'] 
-intents = discord.Intents.default()
-intents.members = True
-intents.message_content = True
-intents.guild_messages = True
-bot = discord.Client(intents=intents)
+#-------------------------------------------------------------------------------------
+def extract_query_bindings(query_results):
+    return [query_results['results']['bindings']]
 
-#-----------------------------------------------------------------------
-def discord_message_data(a):
-    if a == []:
-        return []
-    MESSAGE_VALUE = a[0]['message_value']['value']
-    SOURCE = a[0]['source']['value']
-    DATE = a[0]['timestamp']['value'].split('T')[0]
-    TIME = a[0]['timestamp']['value'].split('T')[1].split('.')[0]
-    return f"""
->>> New message received from: *{SOURCE}*
-{TIME}, {DATE}
-```{MESSAGE_VALUE}
-```
-"""
-#------------------------------------------------------------------------------------
+#Returns a float value of the average temeprature
+def average_temperature(res):
+    if res == []:
+        print('NON CI SONO TEMPERATURE') 
+        return
+    sum = 0
+    for i in range(len(res)):
+        sum += float(res[i]['Temperature']['value'])
+    return sum/(i+1)
 
+#Called when a new temperature is received
 def on_notification(a,r):
     global first_results
     if first_results == 1:
-        print("Ignored first results")
-        first_results=0
+        print('first results ignored')
+        first_results = 0
     else:
-        canale = bot.get_channel(CHANNEL_ID)
-        bot.loop.create_task(canale.send(discord_message_data(a)))
+        res = extract_query_bindings(client.query('ALL_TEMPERATURE'))[0]
+        client.update('SEND_DISCORD_MESSAGE', forcedBindings={
+        "message_value" : str(f'Average temperature: {average_temperature(res)}'),       
+        "source" : "serra"
+        })  
 
-@bot.event
-async def on_ready():
-    client = SEPA(sapObject=SAPObject(_JSAP))
-    client.subscribe('ALL_DISCORD_MESSAGES', 'PROVA', {}, on_notification)
+client = SEPA(sapObject=SAPObject(_JSAP))
+client.subscribe('ALL_TEMPERATURE', 'PROVA', {}, on_notification)
 
-bot.run(TOKEN)
+while(True):
+    time.sleep(10)

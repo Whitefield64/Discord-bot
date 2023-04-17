@@ -7,7 +7,7 @@
 	},
 	"sparql11protocol": {
 		"protocol": "http",
-		"port": 8667,
+		"port": 8000,
 		"query": {
 			"path": "/query",
 			"method": "POST",
@@ -23,7 +23,7 @@
 		"protocol": "ws",
 		"availableProtocols": {
 			"ws": {
-				"port": 9667,
+				"port": 9000,
 				"path": "/subscribe"
 			},
 			"wss": {
