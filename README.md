@@ -9,10 +9,10 @@ First of all set your working directory to 'src'
 cd ./DiscordBot/src
 </pre>
 
-Now, bot can be configured in three ways.
+Now, bot can be configured in three ways. You can set the needed parametres (1,2) or just use a different JSAP file (3)
 
-- In the directory 'src' there is another one called 'resources'. In that directory there is a default JSAP file.
+1- In the directory 'src' there is another one called 'resources'. In that directory there is a default JSAP file.
 Open that file and configure the parametres: `host`, `sparql11protocol.port`, `saprql11seprotocol.availableProtocols.ws.port`, `TOKEN` and `CHANNEL_ID`.
-- Set the five parameters as enviroment variables on your shell. Set `HOST_NAME`, `HTTP_PORT`, `WS_PORT`, `CHANNEL_ID`, `TOKEN`.
-- Specify a different JSAP path, different from the default one using line arguments.   <pre>python ./yourscript.py -jsap yourpath.jsap</pre>
+2- Set the same five parameters as enviroment variables on your shell. Set `HOST_NAME`, `HTTP_PORT`, `WS_PORT`, `CHANNEL_ID`, `TOKEN`.
+3- Specify a different JSAP path, different from the default one using line arguments.   <pre>python ./yourscript.py -jsap yourpath.jsap</pre>
 ## Deployment
