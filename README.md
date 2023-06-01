@@ -23,7 +23,6 @@ If you don't know how to get your CHANNEL_ID and your TOKEN follow these steps:
 #### CHANNEL_ID
 - Just open your Discord server and right click on the insterested channel
 - Click on 'copy channel ID'
--immagine
 #### TOKEN
 To have your personal token you have to setup your bot on the Discord API.
 - Visit on the website https://discord.com/developers/applications
