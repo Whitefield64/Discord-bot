@@ -18,4 +18,22 @@ Open that file and configure the parametres: `host`, `sparql11protocol.port`, `s
 - Set the same five parameters as enviroment variables on your shell. Set `HOST_NAME`, `HTTP_PORT`, `WS_PORT`, `CHANNEL_ID`, `TOKEN`.
 
 - Specify a different JSAP path, different from the default one using line arguments.   <pre>python ./yourscript.py -jsap yourpath.jsap</pre>
+
+If you don't know how to get your CHANNEL_ID and your TOKEN follow these steps:
+#### CHANNEL_ID
+- Just open your Discord server and right click on the insterested channel
+- Click on 'copy channel ID'
+-immagine
+#### TOKEN
+To have your personal token you have to setup your bot on the Discord API.
+- Visit on the website https://discord.com/developers/applications
+- Click on 'new application'
+- Give a name to your application and click on 'create'
+- Click on 'OAuth2', 'URL generation' on the right panel
+- Set 'bot' as scope and 'administrator' as bot permissions
+- Copy the generated URL on a new page
+- Add the bot to your server (now your bot is active and you should be able to see it in the server members)
+- Go back to the previous page
+- Click on 'Bot' on the right panel
+- Your token is probably hidden, reset it to see it.
 ## Deployment
