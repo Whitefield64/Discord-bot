@@ -35,4 +35,5 @@ To have your personal token you have to setup your bot on the Discord API.
 - Go back to the previous page
 - Click on 'Bot' on the right panel
 - Your token is probably hidden, reset it to see it.
+In that page enable all the 'Privileged Gateway Intents' before you start the bot. 
 ## Deployment
