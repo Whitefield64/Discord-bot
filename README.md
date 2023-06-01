@@ -13,7 +13,7 @@ As shown in the image a JSAP file is used to configure the bot, but it is possib
 Bot can be configured in three ways.
 
 - In the directory 'src' there is another one called 'resources'. In that directory there is a default JSAP file.
-Open that file and configure the parametres: `host`, `sparql11protocol.port`, `saprql11seprotocol.availableProtocols.ws.port` and `TOKEN` and `CHANNEL_ID` , in the extended section.
+Open that file and configure the parametres: `host`, `sparql11protocol.port`, `saprql11seprotocol.availableProtocols.ws.port`, `extended.discordConfig.TOKEN` and `extended.discordConfig.CHANNEL_ID`.
 
 - Set the same five parameters as enviroment variables on your shell. Set `HOST_NAME`, `HTTP_PORT`, `WS_PORT`, `CHANNEL_ID`, `TOKEN`.
 
