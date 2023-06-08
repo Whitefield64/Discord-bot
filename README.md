@@ -41,8 +41,32 @@ In that page enable all the 'Privileged Gateway Intents' before you start the bo
 
 ## Docker Deployment
 The Application is already available as a premade docker image.
-Run the image with:
+Run the image with the command:
 <pre>
-docker run --env HOST_NAME="localhost" --env HTTP_PORT="8000" WS_PORT="9000" --env CHANNEL_ID="your-channel-id" --env TOKEN="your-token" --name my-discord-bot -d gregnet/discord-bot:latest exec "python ./consumer.py"
+docker run --env HOST_NAME="sepa.engine" --env HTTP_PORT="8000" WS_PORT="9000" --env CHANNEL_ID="your-channel-id" --env TOKEN="your-token" --name my-discord-bot -d gregnet/discord-bot:latest exec "python ./consumer.py"
+</pre>
+Here is an example of consumer + aggregator deployment using docker-compose.yml:
+<pre>
+  discord-bot-consumer:
+    image: gregnet/discord-bot:latest
+    cmd: "python ./consumer.py"
+    networks:
+      - default
+    environment:
+      - HOST_NAME="sepa.engine"
+      - HTTP_PORT="8000"
+      - WS_PORT="9000"
+      - CHANNEL_ID="your-channel-id"
+      - TOKEN="your-token"
+
+  error-messages-aggregator:
+    image: gregnet/discord-bot:latest
+    cmd: "python ./error_messages_aggregator.py"
+    networks:
+      - default
+    environment:
+      - HOST_NAME="sepa.engine"
+      - HTTP_PORT="8000"
+      - WS_PORT="9000"  
 </pre>
 
