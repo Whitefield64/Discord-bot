@@ -4,16 +4,12 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 import json
 from sepy.SAPObject import *
 from sepy.SEPA import SEPA
-<<<<<<< Updated upstream
 import sys
 import os
-#provadiocane
-=======
-#diomaiale
+
 mySAP = open("default.jsap", 'r')
 _JSAP = json.load(mySAP)
 
->>>>>>> Stashed changes
 scheduler = AsyncIOScheduler()
 
 first_results=1
