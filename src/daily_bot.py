@@ -6,7 +6,7 @@ from sepy.SAPObject import *
 from sepy.SEPA import SEPA
 import sys
 import os
-#provadiocane
+#portatiel
 scheduler = AsyncIOScheduler()
 
 first_results=1
