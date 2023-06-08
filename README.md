@@ -36,4 +36,13 @@ To have your personal token you have to setup your bot on the Discord API.
 - Click on 'Bot' on the right panel
 - Your token is probably hidden, reset it to see it.
 In that page enable all the 'Privileged Gateway Intents' before you start the bot. 
-## Deployment
+
+<br>
+
+## Docker Deployment
+The Application is already available as a premade docker image.
+Run the image with:
+<pre>
+docker run --env HOST_NAME="localhost" --env HTTP_PORT="8000" WS_PORT="9000" --env CHANNEL_ID="your-channel-id" --env TOKEN="your-token" --name my-discord-bot -d gregnet/discord-bot:latest exec "python ./consumer.py"
+</pre>
+
