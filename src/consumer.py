@@ -23,6 +23,14 @@ if len(sys.argv) == 1 :
     print("- Jsap loaded, overriding configuration")
     # OVERRIDE VARIABLES
     try:
+        first_results=os.environ['FIRST_RESULTS']
+        print("- Env variable 'FIRST_RESULTS' set with value: "+str(first_results))
+    except:
+        first_results=1
+        print("- Env variable 'FIRST_RESULTS' not set, using default: "+str(first_results))
+    finally:
+        pass
+    try:
         _JSAP["host"]=os.environ['HOST_NAME']
         print("- Env variable 'HOST_NAME' set with value: "+str(_JSAP["host"]))
     except:
