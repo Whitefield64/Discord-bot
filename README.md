@@ -49,7 +49,8 @@ Here is an example of consumer + aggregator deployment using docker-compose.yml:
 <pre>
   discord-bot-consumer:
     image: gregnet/discord-bot:latest
-    cmd: "python ./consumer.py"
+    working_dir: "/usr/src/app"
+    command: "python ./consumer.py"
     networks:
       - default
     environment:
@@ -61,7 +62,8 @@ Here is an example of consumer + aggregator deployment using docker-compose.yml:
 
   error-messages-aggregator:
     image: gregnet/discord-bot:latest
-    cmd: "python ./error_messages_aggregator.py"
+    working_dir: "/usr/src/app"
+    command: "python ./error_messages_aggregator.py"
     networks:
       - default
     environment:
