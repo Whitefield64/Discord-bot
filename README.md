@@ -54,11 +54,11 @@ Here is an example of consumer + aggregator deployment using docker-compose.yml:
     networks:
       - default
     environment:
-      - HOST_NAME="sepa.engine"
-      - HTTP_PORT="8000"
-      - WS_PORT="9000"
-      - CHANNEL_ID="your-channel-id"
-      - TOKEN="your-token"
+      - HOST_NAME=sepa.engine
+      - HTTP_PORT=8000
+      - WS_PORT=9000
+      - CHANNEL_ID=your-channel-id
+      - TOKEN=your-token
 
   error-messages-aggregator:
     image: gregnet/discord-bot:latest
@@ -67,8 +67,8 @@ Here is an example of consumer + aggregator deployment using docker-compose.yml:
     networks:
       - default
     environment:
-      - HOST_NAME="sepa.engine"
-      - HTTP_PORT="8000"
-      - WS_PORT="9000"  
+      - HOST_NAME=sepa.engine
+      - HTTP_PORT=8000
+      - WS_PORT=9000
 </pre>
 
