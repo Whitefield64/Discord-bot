@@ -44,7 +44,8 @@
 		"my2sec": "http://www.vaimee.it/ontology/my2sec#",
 		"vaimee": "http://www.vaimee.it/ontology#",
 		"discord": "http://www.vaimee.it/ontology/discord#",
-		"serra": "http://www.vaimee.it/ontology/serra#"
+		"serra": "http://www.vaimee.it/ontology/serra#",
+		"error": "http://www.vaimee.it/ontology/error#"
 	},
 	"extended": {
 		"discordConfig": {
