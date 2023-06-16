@@ -27,9 +27,9 @@ if len(sys.argv) == 1 :
     # OVERRIDE VARIABLES
     try:
         _message_graph=os.environ['MESSAGE_GRAPH']
-        print("- Env variable 'HOST_NAME' set with value: "+str(_message_graph))
+        print("- Env variable 'MESSAGE_GRAPH' set with value: "+str(_message_graph))
     except:
-        print("- Env variable 'HOST_NAME' not set, using default: "+str(_message_graph))
+        print("- Env variable 'MESSAGE_GRAPH' not set, using default: "+str(_message_graph))
     finally:
         pass
 
