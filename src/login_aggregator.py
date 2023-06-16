@@ -95,7 +95,7 @@ def on_notification(a,r):
     else:
         client.update('SEND_DISCORD_MESSAGE', forcedBindings={
         "message_value" : login_format(a),       
-        "source" : "LOGIN_AGGREGATOR"
+        "source" : "http://www.vaimee.it/sources/login_aggregator"
         })
 
 client = SEPA(sapObject=SAPObject(_JSAP))
