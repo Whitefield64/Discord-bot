@@ -5,6 +5,9 @@ import json
 import os
 import sys
 
+# Di default usiamo questo
+_message_graph= "http://www.vaimee.it/my2sec/messages/discord"
+
 first_results=1
 print("#####################")
 print("DISCORD CONSUMER v0.1")
@@ -22,6 +25,14 @@ if len(sys.argv) == 1 :
     _JSAP = json.load(mySAP)
     print("- Jsap loaded, overriding configuration")
     # OVERRIDE VARIABLES
+    try:
+        _message_graph=os.environ['MESSAGE_GRAPH']
+        print("- Env variable 'HOST_NAME' set with value: "+str(_message_graph))
+    except:
+        print("- Env variable 'HOST_NAME' not set, using default: "+str(_message_graph))
+    finally:
+        pass
+
     try:
         _JSAP["host"]=os.environ['HOST_NAME']
         print("- Env variable 'HOST_NAME' set with value: "+str(_JSAP["host"]))
@@ -113,6 +124,8 @@ def on_notification(a,r):
 @bot.event
 async def on_ready():
     client = SEPA(sapObject=SAPObject(_JSAP))
-    client.subscribe('ALL_DISCORD_MESSAGES', 'PROVA', {}, on_notification)
+    client.subscribe('ALL_DISCORD_MESSAGES', 'PROVA', {
+        "message_graph":_message_graph
+    }, on_notification)
 
 bot.run(TOKEN)

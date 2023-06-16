@@ -53,73 +53,56 @@
 			"TOKEN": "your_token"
 		}
 	},
-	"updates": {
 
+	"updates": {
 		"SEND_DISCORD_MESSAGE":{
-			"sparql":"INSERT { GRAPH discord:messages { ?uuid rdf:type discord:Message; discord:messageValue ?message_value; discord:messageSource ?source; time:inXSDDateTimeStamp ?timestamp }} WHERE {BIND(uuid() AS ?uuid) BIND(now() AS ?timestamp) }",
+			"sparql":"INSERT { GRAPH ?message_graph { ?uuid rdf:type discord:Message; my2sec:messageValue ?message_value; my2sec:sourceAggregator ?source; time:inXSDDateTimeStamp ?timestamp }} WHERE{ BIND(UUID() AS ?uuid) BIND(now() AS ?timestamp)}",
 			"forcedBindings": {
+				"message_graph":{
+					"type":"uri",
+					"value":"http://www.vaimee.it/my2sec/messages/discord"
+				},
 				"message_value": {
 					"type": "literal",
 					"value": "testo"
 				},
 				"source": {
-					"type": "literal",
+					"type": "uri",
 					"value": "http://www.vaimee.it/sources/bug-report"
 				}
 			}
 		},
 
-		"SEND_DISCORD_MESSAGE_TEST":{
-			"sparql":"INSERT { GRAPH discord:messages { ?uuid rdf:type discord:Message; discord:messageValue '''CIAO'''; discord:messageSource '''IO'''; time:inXSDDateTimeStamp ?timestamp }} WHERE {BIND(uuid() AS ?uuid) BIND(now() AS ?timestamp) }"
-		},
-		"SEND_TEMPERATURE":{
-			"sparql":"INSERT { GRAPH serra:temperature { ?uuid rdf:type serra:Sensor; serra:name '''sensore1'''; serra:hasTemp '''28'''; time:inXSDDateTimeStamp ?timestamp }} WHERE {BIND(uuid() AS ?uuid) BIND(now() AS ?timestamp) }"
-		},
 		"SEND_ERROR":{
 			"sparql":"INSERT { GRAPH error:messages { ?uuid rdf:type error:Error; error:Type '''ErrorMessage'''; error:source '''BugReportMy2Sec'''; time:inXSDDateTimeStamp ?timestamp; error:errorType '''FATAL'''; error:value '''error full description'''; error:comment '''dev comment'''}} WHERE {BIND(uuid() AS ?uuid) BIND(now() AS ?timestamp) }"
-		},
-		"ADD_USER":{
-			"sparql":"INSERT DATA { GRAPH <http://www.vaimee.it/my2sec/members> { ?usergraph my2sec:username ?username_literal }}",
-			"forcedBindings": {
-				"usergraph": {
-					"type": "uri",
-					"value": "http://www.vaimee.it/my2sec/defuser@vaimee.it"
-				},
-				"username_literal": {
-					"type": "literal",
-					"value": "defuser"
-				}
-			}
-		},
-		"DELETE_GRAPH":{
-			"sparql":"DELETE { GRAPH ?graph { ?s ?p ?o }  } WHERE { GRAPH ?graph { ?s ?p ?o } }",
-			"forcedBindings": {
-				"graph": {
-					"type": "uri",
-					"value": "vaimee:example"
-				}
-			}
 		}
 	},
+
 	"queries": {
 		"ALL_DISCORD_MESSAGES":{
-			"sparql":"SELECT * WHERE { GRAPH discord:messages { ?uuid rdf:type discord:Message; discord:messageValue ?message_value; discord:messageSource ?source; time:inXSDDateTimeStamp ?timestamp}}"
-	},
-		"ALL_TEMPERATURE":{
-			"sparql":"SELECT ?Name ?Temperature ?Time WHERE { GRAPH serra:temperature { ?uuid rdf:type serra:Sensor; serra:name ?Name; serra:hasTemp ?Temperature; time:inXSDDateTimeStamp ?Time}}"
-	},
+			"sparql":"SELECT * WHERE { GRAPH ?message_graph { ?uuid rdf:type discord:Message; my2sec:messageValue ?message_value; my2sec:sourceAggregator ?source; time:inXSDDateTimeStamp ?timestamp }}",
+			"forcedBindings": {
+				"message_graph": {
+					"type": "uri",
+					"value": "http://www.vaimee.it/my2sec/messages/discord"
+				}
+			}
+		},
+		
 		"ALL_ERROR":{
 			"sparql":"SELECT ?Type ?Source ?Time ?ErrorType ?Value ?Comment WHERE { GRAPH error:messages { ?uuid rdf:type error:Error; error:Type ?Type; error:source ?Source; time:inXSDDateTimeStamp ?Time; error:errorType ?ErrorType; error:value ?Value; error:comment ?Comment}}"
-	},
+		},
+		
 		"ALL_USERNAMES": {
 			"sparql":"SELECT * WHERE { GRAPH <http://www.vaimee.it/my2sec/members> { ?s my2sec:username ?o }}"
-	},
-		"DISCORD_ALL_INFO":{
-			"sparql":"SELECT * WHERE { GRAPH discord:messages { ?S ?P ?O}}"
-	},
-		"GET_ALL_GRAPHS_COUNT":{
-			"sparql":"SELECT ?g (COUNT(?s) AS ?ntriples) WHERE {GRAPH ?g { ?s ?p ?o }}GROUP BY ?g"
+		}
 	}
 
-	}
+
+
+
+
+
+
+	"backup":{}
 }
