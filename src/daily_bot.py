@@ -7,9 +7,6 @@ from sepy.SEPA import SEPA
 import sys
 import os
 
-mySAP = open("default.jsap", 'r')
-_JSAP = json.load(mySAP)
-
 scheduler = AsyncIOScheduler()
 
 first_results=1
@@ -128,7 +125,7 @@ async def send_recap():
 
 @bot.event
 async def on_ready():
-    scheduler.add_job(send_remember, 'cron', hour=12, minute=43)
+    scheduler.add_job(send_remember, 'cron', hour=10, minute=14)
     scheduler.add_job(send_recap, 'cron', hour=12, minute=44) 
     scheduler.start()
         
