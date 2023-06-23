@@ -11,7 +11,7 @@ scheduler = AsyncIOScheduler()
 
 first_results=1
 print("#####################")
-print("DISCORD CONSUMER v0.1")
+print("DISCORD DAILY BOT v0.1")
 print("#####################")
 
 #-----OVERRIDE DEFAULT JSAP CONFIGURATION---------------------------------------------------------------
