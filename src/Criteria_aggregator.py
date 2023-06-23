@@ -68,8 +68,6 @@ def irrigation_format(feature_obs,feature_name):
         print(f"discord message sent")
     else:
         print(f"discord message not sent because all feature's irrigation value was 0")
-    
-    #da non inviare se il il value di tutti i ptime (tutti  e 3) è uguale a 0
 
 def on_notification(a,r):
     global first_results
