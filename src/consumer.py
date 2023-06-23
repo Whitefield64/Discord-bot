@@ -120,6 +120,7 @@ def on_notification(a,r):
     else:
         canale = bot.get_channel(CHANNEL_ID)
         bot.loop.create_task(canale.send(discord_message_data(a)))
+        print('message sent successfully')
 
 @bot.event
 async def on_ready():

@@ -52,7 +52,12 @@
         "criteriaProperty": "https://vaimee.com/meter/criteria/property#",
         "xsd": "http://www.w3.org/2001/XMLSchema#",
         "meter": "https://vaimee.com/meter#",
-        "meterSensor": "https://vaimee.com/meter/sensors#"
+        "meterSensor": "https://vaimee.com/meter/sensors#",
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+		"owl": "http://www.w3.org/2002/07/owl#",
+		"my2sec": "http://www.vaimee.it/ontology/my2sec#",
+		"vaimee": "http://www.vaimee.it/ontology#",
+		"discord": "http://www.vaimee.it/ontology/discord#"
     },
     "extended": {
         "sqlMapping": {
@@ -604,6 +609,23 @@
     },
     
     "updates": {
+        "SEND_DISCORD_MESSAGE":{
+			"sparql":"INSERT { GRAPH ?message_graph { ?uuid rdf:type discord:Message; my2sec:messageValue ?message_value; my2sec:sourceAggregator ?source; time:inXSDDateTimeStamp ?timestamp }} WHERE{ BIND(UUID() AS ?uuid) BIND(now() AS ?timestamp)}",
+			"forcedBindings": {
+				"message_graph":{
+					"type":"uri",
+					"value":"http://www.vaimee.it/my2sec/messages/discord"
+				},
+				"message_value": {
+					"type": "literal",
+					"value": "testo"
+				},
+				"source": {
+					"type": "uri",
+					"value": "http://www.vaimee.it/sources/bug-report"
+				}
+			}
+		},
     	"cleanAllData" : {
     		"sparql" : "DELETE WHERE { GRAPH ?g { ?s ?p ?o }}"
     	},
