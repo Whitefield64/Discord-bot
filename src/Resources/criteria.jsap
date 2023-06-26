@@ -60,6 +60,10 @@
 		"discord": "http://www.vaimee.it/ontology/discord#"
     },
     "extended": {
+		"discordConfig": {
+			"CHANNEL_ID": 1082321734058901598, 
+			"TOKEN": "MTA4MjYyMTk2MTAwNTQ1MzMxMw.G6b0w9.IlrP1gc42YISAmhS_FeExFn3u40ii5PbL_8bZI"
+		},
         "sqlMapping": {
             "UNITS": {
                 "baseDBPath": "../data",

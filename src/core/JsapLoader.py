@@ -36,6 +36,20 @@ def get_configured_jsap():
             print("- Env variable 'WS_PORT' not set, using default: "+str(_JSAP["sparql11seprotocol"]["availableProtocols"]["ws"]["port"]))
         finally:
             pass
+        try:
+            _JSAP['extended']['discordConfig']['CHANNEL_ID']=os.environ['CHANNEL_ID']
+            print("- Env variable 'CHANNEL_ID' set with value: "+str(_JSAP['extended']['discordConfig']['CHANNEL_ID']))
+        except:
+            print("- Env variable 'CHANNEL_ID' not set, using default: "+str(_JSAP['extended']['discordConfig']['CHANNEL_ID']))
+        finally:
+            pass
+        try:
+            _JSAP['extended']['discordConfig']['TOKEN']=os.environ['TOKEN']
+            print("- Env variable 'TOKEN' set with value: "+str(_JSAP['extended']['discordConfig']['TOKEN'] ))
+        except:
+            print("- Env variable 'TOKEN' not set, using default: "+str(_JSAP['extended']['discordConfig']['TOKEN'] ))
+        finally:
+            pass
         print("####################################################################")
     else:
         if sys.argv[1] == "-jsap": # OVERRIDE WITH COMMAND LINE ARGUMENT
@@ -50,4 +64,4 @@ def get_configured_jsap():
         else:
             print("WARNING: unknown parameter: "+str(sys.argv[1]))
             print_help()
-    return _JSAP    
+    return _JSAP

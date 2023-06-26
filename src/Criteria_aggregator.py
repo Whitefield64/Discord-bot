@@ -1,9 +1,6 @@
 from sepy.SAPObject import *
 from sepy.SEPA import SEPA
-import json
 import time
-import os
-import sys
 
 import core.JsapLoader as JsapLoader
 
@@ -14,11 +11,6 @@ print("#####################")
 
 #-----OVERRIDE DEFAULT JSAP CONFIGURATION---------------------------------------------------------------
 _JSAP= JsapLoader.get_configured_jsap()
-#------------------------------------------------------------------------------------
-#Formats subscription data. Returns a formatted string
-def irrigation_format(res): 
-
-    return
 #------------------------------------------------------------------------------------- 
 _CACHE={}  
 def add_to_cache(binding):
@@ -52,7 +44,7 @@ def irrigation_format(feature_obs,feature_name):
     for ptime in feature_obs:
         comp.append(float(feature_obs[ptime]['value']))
     if sum(comp) != 0:
-        print("value's sum is higher than 0 so we have to send data")
+        #print("value's sum is higher than 0 so we have to send data")
         PTIME = []
         VALUE = []
         UNIT = []
@@ -80,14 +72,6 @@ def on_notification(a,r):
             print(_CACHE)  
 
         check_cache()
-
-        '''client.update('SEND_DISCORD_MESSAGE', forcedBindings={
-        "message_value" : 'irrigation_format(a)',       
-        "source" : "http://www.vaimee.it/sources/criteria_aggregator"
-        })
-        print('discord message sent')'''
-        
-
 
 client = SEPA(sapObject=SAPObject(_JSAP))
 client.subscribe('Unit_irrigation_needs', 'PROVA', {}, on_notification)
