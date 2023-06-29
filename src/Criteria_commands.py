@@ -9,13 +9,12 @@ import core.JsapLoader as JsapLoader
 
 _JSAP= JsapLoader.get_configured_jsap()
 
-#NUOVA CONFIGURAZIONE-------------------------------------------
+#DISCROD CONFIGURATION-------------------------------------------
 CHANNEL_ID = int(_JSAP['extended']['discordConfig']['CHANNEL_ID'])    
 TOKEN = _JSAP['extended']['discordConfig']['TOKEN'] 
 bot = commands.Bot(command_prefix='/', description='', intents=discord.Intents.all())
-#---------------------------------------------------------------
 
-
+#COMMAND SYNCHRONIZATION-----------------------------------------
 @bot.event
 async def on_ready():
     print('---------BOT ONLINE---------')
@@ -28,6 +27,7 @@ async def on_ready():
         await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name = ''))
     except Exception:
         print('!!!SOMETHING WENT WRONG WITH COMMANDS SYNCHRONIZATION!!!')
+#----------------------------------------------------------------
 
 @bot.tree.command(name='availablewater', description='Send AvailableWater parameter')
 @app_commands.describe(feature='insert the interested feature')
