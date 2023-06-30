@@ -7,7 +7,7 @@ import sys
 
 first_results=1
 print("#####################")
-print("DISCORD CONSUMER v0.1")
+print("ERROR MESSAGES AGGREGATOR v0.1")
 print("#####################")
 
 #-----OVERRIDE DEFAULT JSAP CONFIGURATION---------------------------------------------------------------
@@ -97,8 +97,9 @@ def on_notification(a,r):
         first_results = 0
     else:
         client.update('SEND_DISCORD_MESSAGE', forcedBindings={
+        "message_graph" : "http://www.vaimee.it/my2sec/messages/discord",
         "message_value" : error_format(a),       
-        "source" : "ERROR_MESSAGES_AGGREGATOR"
+        "source" : "http://www.vaimee.it/sources/error_messages_aggregator"
         })
 
 client = SEPA(sapObject=SAPObject(_JSAP))

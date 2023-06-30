@@ -92,11 +92,8 @@ else:
 CHANNEL_ID = int(_JSAP['extended']['discordConfig']['CHANNEL_ID'])    
 TOKEN = _JSAP['extended']['discordConfig']['TOKEN'] 
 intents = discord.Intents.default()
-intents.members = True
-intents.message_content = True
-intents.guild_messages = True
 bot = discord.Client(intents=intents)
-
+#!cambia ID canale
 #-----------------------------------------------------------------------
 def discord_message_data(a):
     if a == []:
