@@ -114,5 +114,5 @@ async def drainage(interaction:discord.Interaction, feature:str):
         descr = format(a)
         emb = discord.Embed(title=f'{feature} Drainage:', description=descr, color=discord.Color.from_rgb(0,0,255))  
         await interaction.response.send_message(embed=emb)
-
+#!da cambiare il criteria.jsap per ottenere risultati di oggi!!!!!!!!!!!!
 bot.run(TOKEN)
