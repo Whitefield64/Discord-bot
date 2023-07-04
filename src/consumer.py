@@ -7,7 +7,7 @@ import sys
 
 # Di default usiamo questo
 _message_graph= "http://www.vaimee.it/my2sec/messages/discord"
-
+#!chiedi a greg config da jsap e da consumer
 first_results=1
 print("#####################")
 print("DISCORD CONSUMER v0.1")
@@ -17,7 +17,8 @@ print("#####################")
 def print_help():
     print("--<HELP WINDOW>--")
     print("Run with: python ./yourscript.py -jsap path.jsap")
-
+    print("For a complete description of how to run the Bot see the 'configuration' chapter in the readme file on GitHub: https://github.com/Whitefield64/Discord-bot/blob/master/README.md")
+    print('-------------------------------------------------------------------------------')
 if len(sys.argv) == 1 :
     print("####################################################################")
     mySAP = open("./Resources/default.jsap", 'r')
@@ -113,9 +114,12 @@ def on_notification(a,r):
         print("Ignored first results")
         first_results=0
     else:
-        canale = bot.get_channel(CHANNEL_ID)
-        bot.loop.create_task(canale.send(discord_message_data(a)))
-        print('message sent successfully')
+        if discord_message_data(a) == []:
+            return
+        else:
+            canale = bot.get_channel(CHANNEL_ID)
+            bot.loop.create_task(canale.send(discord_message_data(a)))
+            print('message sent successfully')
 
 @bot.event
 async def on_ready():
