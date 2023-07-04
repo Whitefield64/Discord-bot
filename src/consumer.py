@@ -19,7 +19,6 @@ def print_help():
     print("Run with: python ./yourscript.py -jsap path.jsap")
 
 if len(sys.argv) == 1 :
-    #QUI SIAMO IN DOCKER
     print("####################################################################")
     mySAP = open("./Resources/default.jsap", 'r')
     _JSAP = json.load(mySAP)
@@ -71,7 +70,6 @@ if len(sys.argv) == 1 :
     print("####################################################################")
 else:
     if sys.argv[1] == "-jsap": # OVERRIDE WITH COMMAND LINE ARGUMENT
-        #QUI SIAMO IN LOCALHOST
         print("####################################################################")
         print("Loading custom jsap from: "+sys.argv[2])
         mySAP = open(sys.argv[2], 'r')

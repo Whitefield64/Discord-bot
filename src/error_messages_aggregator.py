@@ -97,7 +97,6 @@ def on_notification(a,r):
         first_results = 0
     else:
         client.update('SEND_DISCORD_MESSAGE', forcedBindings={
-        "message_graph" : "http://www.vaimee.it/my2sec/messages/discord",
         "message_value" : error_format(a),       
         "source" : "http://www.vaimee.it/sources/error_messages_aggregator"
         })
