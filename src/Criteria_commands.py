@@ -75,7 +75,7 @@ for property in properties:
 @bot.tree.command(name='availablewater', description=f'Send availablewater parameter')
 @app_commands.describe(feature='insert the interested feature')
 async def availablewater(interaction:discord.Interaction, feature:str):
-    conc_feature = 'https://vaimee.com/meter#'+feature+'_table'
+    conc_feature = 'https://vaimee.com/meter#'+feature+''
     conc_porperty = 'https://vaimee.com/meter/criteria/property#AvailableWater'
     #print(conc_feature)
     #print(conc_porperty)
@@ -97,7 +97,7 @@ async def availablewater(interaction:discord.Interaction, feature:str):
 @bot.tree.command(name='drainage', description=f'Send drainage parameter')
 @app_commands.describe(feature='insert the interested feature')
 async def drainage(interaction:discord.Interaction, feature:str):
-    conc_feature = 'https://vaimee.com/meter#'+feature+'_table'
+    conc_feature = 'https://vaimee.com/meter#'+feature+''
     conc_property = 'https://vaimee.com/meter/criteria/property#Drainage'
     print(conc_feature)
     print(conc_property)
@@ -114,5 +114,5 @@ async def drainage(interaction:discord.Interaction, feature:str):
         descr = format(a)
         emb = discord.Embed(title=f'{feature} Drainage:', description=descr, color=discord.Color.from_rgb(0,0,255))  
         await interaction.response.send_message(embed=emb)
-#!da cambiare il criteria.jsap per ottenere risultati di oggi!!!!!!!!!!!!
+
 bot.run(TOKEN)
