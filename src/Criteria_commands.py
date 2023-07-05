@@ -37,7 +37,7 @@ def format(res):
         UNIT.append(observation['unit']['value'])
     text = ''
     for i in range(len(PTIME)):
-        text = text+f"* {PTIME[i].split('T')[0]}: {VALUE[i]} {UNIT[i].split('/')[-1]}\n"
+        text = text+f"* {PTIME[i].split('T')[0]}: {VALUE[i]} {UNIT[i].split('#')[-1]}\n"
     return text
 '''
 #----------------------------------------------------------------
