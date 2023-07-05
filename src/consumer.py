@@ -7,7 +7,7 @@ import sys
 
 # Di default usiamo questo
 _message_graph= "http://www.vaimee.it/my2sec/messages/discord"
-#!chiedi a greg config da jsap e da consumer
+
 first_results=1
 print("#####################")
 print("DISCORD CONSUMER v0.1")
@@ -102,7 +102,7 @@ def discord_message_data(a):
     DATE = a[0]['timestamp']['value'].split('T')[0]
     TIME = a[0]['timestamp']['value'].split('T')[1].split('.')[0]
     return f"""
->>> {TIME}, {DATE}: New message received from: **{SOURCE}**
+>>> {TIME}, {DATE}: New message received from: **{SOURCE.split('/')[-1]}**
 ```{MESSAGE_VALUE}
 ```
 """
