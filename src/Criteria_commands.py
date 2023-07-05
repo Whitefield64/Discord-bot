@@ -90,8 +90,9 @@ async def availablewater(interaction:discord.Interaction, feature:str):
         print(f'This feature has no AvailableWater parametres or it does not exist')
     else:
         descr = format(a)    
-        emb = discord.Embed(title=f'{feature} AvailableWater:', description=descr, color=discord.Color.from_rgb(0,0,255))  
-        #emb.set_author(name='Agrifirm Bot', icon_url='https://grafana.criteria.vaimee.com/public/img/grafana_icon.svg') #!immagine non discponibile, aggiunta estetica
+        emb = discord.Embed(title=f'AvailableWater:', description=descr, color=discord.Color.from_rgb(0,55,230))  
+        emb.set_author(name=feature, icon_url='https://raw.githubusercontent.com/Whitefield64/Discord-bot/master/img/farm-plot.svg')
+        emb.set_thumbnail(url='https://raw.githubusercontent.com/Whitefield64/Discord-bot/master/img/water-drop-icon.png')
         await interaction.response.send_message(embed=emb)
 
 @bot.tree.command(name='drainage', description=f'Send drainage parameter')
@@ -112,7 +113,9 @@ async def drainage(interaction:discord.Interaction, feature:str):
         print(f'This feature has no Drainage parametres or it does not exist')
     else:
         descr = format(a)
-        emb = discord.Embed(title=f'{feature} Drainage:', description=descr, color=discord.Color.from_rgb(0,0,255))  
+        emb = discord.Embed(title=f'Drainage:', description=descr, color=discord.Color.from_rgb(0,55,230))
+        emb.set_author(name=feature, icon_url='')
+        emb.set_thumbnail(url='') 
         await interaction.response.send_message(embed=emb)
 
 bot.run(TOKEN)
