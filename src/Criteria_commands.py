@@ -75,7 +75,7 @@ for property in properties:
 @bot.tree.command(name='availablewater', description=f'Send availablewater parameter')
 @app_commands.describe(feature='insert the interested feature')
 async def availablewater(interaction:discord.Interaction, feature:str):
-    conc_feature = 'https://vaimee.com/meter#'+feature+''
+    conc_feature = 'https://vaimee.com/meter#'+feature
     conc_porperty = 'https://vaimee.com/meter/criteria/property#AvailableWater'
     #print(conc_feature)
     #print(conc_porperty)
@@ -97,7 +97,7 @@ async def availablewater(interaction:discord.Interaction, feature:str):
 @bot.tree.command(name='drainage', description=f'Send drainage parameter')
 @app_commands.describe(feature='insert the interested feature')
 async def drainage(interaction:discord.Interaction, feature:str):
-    conc_feature = 'https://vaimee.com/meter#'+feature+''
+    conc_feature = 'https://vaimee.com/meter#'+feature
     conc_property = 'https://vaimee.com/meter/criteria/property#Drainage'
     print(conc_feature)
     print(conc_property)
