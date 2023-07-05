@@ -45,7 +45,19 @@
 		"vaimee": "http://www.vaimee.it/ontology#",
 		"discord": "http://www.vaimee.it/ontology/discord#",
 		"serra": "http://www.vaimee.it/ontology/serra#",
-		"error": "http://www.vaimee.it/ontology/error#"
+		"error": "http://www.vaimee.it/ontology/error#",
+		"schema": "http://schema.org/",
+        "sosa": "http://www.w3.org/ns/sosa/",
+        "qudt": "http://qudt.org/schema/qudt#",
+        "unit": "http://qudt.org/vocab/unit#",
+        "mqtt": "http://wot.arces.unibo.it/mqtt#",
+        "wgs84_pos": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+        "gn": "http://www.geonames.org/ontology#",
+        "weather": "https://vaimee.com/meter/weather/",
+        "criteria": "https://vaimee.com/meter/criteria/",
+        "criteriaProperty": "https://vaimee.com/meter/criteria/property#",
+        "meter": "https://vaimee.com/meter#",
+        "meterSensor": "https://vaimee.com/meter/sensors#"
 	},
 	"extended": {
 		"discordConfig": {
