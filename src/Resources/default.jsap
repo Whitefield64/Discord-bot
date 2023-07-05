@@ -79,6 +79,22 @@
 	},
 
 	"queries": {
+		"getUnitProperty": {
+            "sparql": "SELECT DISTINCT * WHERE { GRAPH criteria:forecast {?observation rdf:type sosa:Observation ;sosa:hasFeatureOfInterest ?feature ;sosa:observedProperty ?property; sosa:resultTime ?time ;sosa:phenomenonTime ?ptime ;sosa:hasResult ?result . ?result rdf:type qudt:QuantityValue ;rdf:type sosa:Result;sosa:isResultOf  ?observation;qudt:unit ?unit ;qudt:numericValue ?value} FILTER (STRSTARTS(?time,strbefore(str(now()),'T')))}",
+            "forcedBindings": {
+                "feature": {
+                    "type": "uri",
+                    "value": "featureBella"
+                },
+                "property": {
+                    "type": "uri",
+                    "value": "https://vaimee.com/meter/criteria/property#IrrigationNeeds"
+                }
+            }
+        },
+        "Unit_irrigation_needs": {
+            "sparql": "SELECT DISTINCT * WHERE { GRAPH criteria:forecast {?observation rdf:type sosa:Observation ;sosa:hasFeatureOfInterest ?feature ;sosa:observedProperty <https://vaimee.com/meter/criteria/property#IrrigationNeeds>;sosa:resultTime ?time ;sosa:phenomenonTime ?ptime ;sosa:hasResult ?result . ?result rdf:type qudt:QuantityValue ;rdf:type sosa:Result;sosa:isResultOf  ?observation;qudt:unit ?unit ;qudt:numericValue ?value} FILTER (STRSTARTS(?time,strbefore(str(now()),'T')))}"
+        },
 		"ALL_DISCORD_MESSAGES":{
 			"sparql":"SELECT * WHERE { GRAPH ?message_graph { ?uuid rdf:type discord:Message; my2sec:messageValue ?message_value; my2sec:sourceAggregator ?source; time:inXSDDateTimeStamp ?timestamp }}",
 			"forcedBindings": {
