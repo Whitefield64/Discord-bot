@@ -77,8 +77,6 @@ for property in properties:
 async def availablewater(interaction:discord.Interaction, feature:str):
     conc_feature = 'https://vaimee.com/meter#'+feature
     conc_porperty = 'https://vaimee.com/meter/criteria/property#AvailableWater'
-    #print(conc_feature)
-    #print(conc_porperty)
     client = SEPA(sapObject=SAPObject(_JSAP))
     a = client.query('getUnitProperty',{
         "feature": conc_feature,
@@ -100,8 +98,6 @@ async def availablewater(interaction:discord.Interaction, feature:str):
 async def drainage(interaction:discord.Interaction, feature:str):
     conc_feature = 'https://vaimee.com/meter#'+feature
     conc_property = 'https://vaimee.com/meter/criteria/property#Drainage'
-    print(conc_feature)
-    print(conc_property)
     client = SEPA(sapObject=SAPObject(_JSAP))
     a = client.query('getUnitProperty',{
         "feature": conc_feature,
