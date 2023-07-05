@@ -114,8 +114,8 @@ async def drainage(interaction:discord.Interaction, feature:str):
     else:
         descr = format(a)
         emb = discord.Embed(title=f'Drainage:', description=descr, color=discord.Color.from_rgb(35,139,232))
-        emb.set_author(name=feature, icon_url='')
-        emb.set_thumbnail(url='') 
+        emb.set_author(name=feature, icon_url='https://raw.githubusercontent.com/Whitefield64/Discord-bot/master/img/farmplot.jpg')
+        emb.set_thumbnail(url='https://raw.githubusercontent.com/Whitefield64/Discord-bot/master/img/water-drop-icon.png') 
         await interaction.response.send_message(embed=emb)
 
 bot.run(TOKEN)
