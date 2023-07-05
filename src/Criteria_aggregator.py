@@ -54,7 +54,7 @@ def irrigation_format(feature_obs,feature_name):
             UNIT.append(feature_obs[ptime]['unit'])
           
         client.update('SEND_DISCORD_MESSAGE', forcedBindings={
-            "message_value" : f"{feature_name.split('_')[-2].split('#')[-1]} irrigation needs:\\n{PTIME[0].split('T')[0]}: {VALUE[0]} {UNIT[0].split('/')[-1]}\\n{PTIME[1].split('T')[0]}: {VALUE[1]} {UNIT[1].split('/')[-1]}\\n{PTIME[2].split('T')[0]}: {VALUE[2]} {UNIT[2].split('/')[-1]}" ,       
+            "message_value" : f"{feature_name.split('_')[-2].split('#')[-1]} irrigation needs:\\n{PTIME[0].split('T')[0]}: {VALUE[0]} {UNIT[0].split('#')[-1]}\\n{PTIME[1].split('T')[0]}: {VALUE[1]} {UNIT[1].split('#')[-1]}\\n{PTIME[2].split('T')[0]}: {VALUE[2]} {UNIT[2].split('#')[-1]}" ,       
             "source" : "http://www.vaimee.it/sources/criteria_aggregator"
             })
         print(f"discord message sent")
