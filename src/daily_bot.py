@@ -1,5 +1,4 @@
 import discord
-from datetime import datetime
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 import json
 from sepy.SAPObject import *
@@ -110,8 +109,8 @@ def recap_formatter(res):
 async def send_remember():
     client = SEPA(sapObject=SAPObject(_JSAP))
     client.update('SEND_DISCORD_MESSAGE', forcedBindings={
-    "message_value" : "Good morning, did you remember to turn on My2sec?",       
-    "source" : "Daily_Bot"
+    "message_value" : "Esempio di promemoria giornaliero",       
+    "source" : "http://www.vaimee.it/sources/daily_bot"
     })
 
 async def send_recap():
@@ -120,12 +119,12 @@ async def send_recap():
     print('query done') 
     client.update('SEND_DISCORD_MESSAGE', forcedBindings={
     "message_value" : recap_formatter(res),       
-    "source" : "Daily_Bot"
+    "source" : "http://www.vaimee.it/sources/daily_bot"
     })
 
 @bot.event
 async def on_ready():
-    scheduler.add_job(send_remember, 'cron', hour=11, minute=35)
+    scheduler.add_job(send_remember, 'cron', hour=11, minute=50)
     scheduler.add_job(send_recap, 'cron', hour=12, minute=44) 
     scheduler.start()
         
