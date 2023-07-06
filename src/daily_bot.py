@@ -110,8 +110,8 @@ def recap_formatter(res):
 async def send_remember():
     client = SEPA(sapObject=SAPObject(_JSAP))
     client.update('SEND_DISCORD_MESSAGE', forcedBindings={
-    "message_value" : 'Good morning, did you remember to turn on My2sec?',       
-    "source" : "Daily Bot"
+    "message_value" : "Good morning, did you remember to turn on My2sec?",       
+    "source" : "Daily_Bot"
     })
 
 async def send_recap():
@@ -120,12 +120,12 @@ async def send_recap():
     print('query done') 
     client.update('SEND_DISCORD_MESSAGE', forcedBindings={
     "message_value" : recap_formatter(res),       
-    "source" : "Daily Bot"
+    "source" : "Daily_Bot"
     })
 
 @bot.event
 async def on_ready():
-    scheduler.add_job(send_remember, 'cron', hour=10, minute=14)
+    scheduler.add_job(send_remember, 'cron', hour=11, minute=35)
     scheduler.add_job(send_recap, 'cron', hour=12, minute=44) 
     scheduler.start()
         
